@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chat</title>
+</head>
+<style>
+    .container {  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 0.9fr 1.1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  overflow: hidden;
+  grid-template-areas:
+    "list msg msg"
+    "list msg msg"
+    "list msg msg";
+}
+
+.list { grid-area: list; overflow-y: scroll;}
+
+.msglist {
+display: grid;
+background-color: bisque;
+grid-template-columns: 1fr;
+grid-template-rows: repeat(9, 1fr);
+grid-column-gap: 0px;
+grid-row-gap: 0px;
+}
+
+.msgcontent { margin-left: 5%; margin-top: 5%;
+}
+
+.div1 {
+            background-color: aqua;
+            margin-left: 20%;
+            margin-right: 20%;
+            margin-top: 5%;
+            margin-bottom: 5%;
+              text-align: center;
+              color: white;
+}
+.msg { grid-area: msg; overflow: hidden; 
+    margin-left: 5%;
+    background-color: aquamarine;
+    height: 100%;}
+
+</style>
+<body>
+    <div class="container">
+        <div class="list">
+            <div class="msglist">
+                <div> <form action="chat" method="post">
+                    <input type="text" name="contactname" id="message" placeholder="type the contact name" width="600px">
+                    <input type="submit" value="send">
+                </form></div>
+                {%for event in range(100)%}
+                    <div class="div1"> {{event}}</div>
+                {%endfor%}
+            </div>
+        </div>
+        <div class="msg">
+            <div class="msgcontent">
+                {%for event in message_list%}
+                    <div class="div2"> {{event}}</div>
+                {%endfor%}
+                <br>
+                <div style="position: fixed;bottom: 0;">
+                    <form action="chat" method="post">
+                        <input type="text" name="message" id="message" placeholder="type your message here ..." width="600px">
+                        <input type="submit" value="send">
+                    </form>
+                </div>
+                
+                
+            </div>
+            
+        </div>
+      </div>
+</body>
+</html>
