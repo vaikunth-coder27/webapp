@@ -20,6 +20,8 @@ client = Cloudant.iam(
 name = 'name'
 email = 'a@b.c'
 password = '123'
+message_list=['hi','bye','bla bla']
+contacts_list=['0','1','2']
 
 user_database = client.create_database('user_database')
 #user_image_database = client.create_database('user_image_database')
@@ -108,6 +110,13 @@ def register():
         #users[email]={'password':flask.request.form['password']}
     
     return render_template('register.html')
+
+@app.route('/chat',methods=["GET","POST"])
+def chat():
+    if(request.method=="POST"):
+        chat_content = request.form['message']
+        message_list.append(chat_content)
+    return render_template('chat.html',message_list=message_list)
 
 if _name=='__main_':
     app.run(debug=True)
